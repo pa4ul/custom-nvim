@@ -1,17 +1,20 @@
 # Optimierte LazyVim Konfiguration
 
-<!--toc:start-->
-- [Optimierte LazyVim Konfiguration](#optimierte-lazyvim-konfiguration)
-  - [Eigene Shortcuts](#eigene-shortcuts)
-  - [Navigation & Dateisuche (Telescope)](#navigation-dateisuche-telescope)
-  - [Fenstermanagement (Splits)](#fenstermanagement-splits)
-  - [Code-Intelligenz & LSP](#code-intelligenz-lsp)
-  - [📂 Befehle im Datei-Explorer](#📂-befehle-im-datei-explorer)
-  - [📝 Markdown Live-Vorschau](#📝-markdown-live-vorschau)
-    - [Einrichtung](#einrichtung)
-    - [Nutzung](#nutzung)
-  - [💾 Git Backup & Versionierung](#💾-git-backup-versionierung)
-<!--toc:end-->
+## UI
+
+<img width="1654" height="1163" alt="Bildschirmfoto 2026-05-20 um 10 25 58" src="https://github.com/user-attachments/assets/f1e5aa96-2f09-41bb-84b9-9cb2b1cf70ff" />
+
+*Die Hauptoberfläche mit dem Datei-Explorer, Splitscreen und Terminal*
+
+<img width="1654" height="1163" alt="Bildschirmfoto 2026-05-20 um 10 28 27" src="https://github.com/user-attachments/assets/6761622a-0828-4217-a1c0-c520b386c434" />
+
+*Find File Feature*
+
+<img width="2047" height="963" alt="Bildschirmfoto 2026-05-20 um 10 31 00" src="https://github.com/user-attachments/assets/4e80c5cd-ef09-4ae6-a3cb-3810ca19ce52" />
+
+*Live Markdown Preview (Hot Reload)*
+
+---
 
 Meine Neovim-Konfiguration, basierend auf [LazyVim](https://github.com/LazyVim/LazyVim). Dieses Repository dient als Backup für mein IDE-Setup, meine angepassten Tastenkürzel und als schnelles Cheatsheet für den Entwicklungsalltag.
 
@@ -95,12 +98,13 @@ Erweiterte IDE-Funktionen über Sprachserver (LSP) für Fehlererkennung und Auto
 
 ## Befehle im Datei-Explorer
 
+
 Wenn der Datei-Explorer (`,d`) geöffnet und fokussiert ist:
 
 | Taste | Aktion |
 | :---: | :--- |
 | `Ctrl` + `v` | Das anvisierte File als **vertikalen** Split-Screen (nebenan) öffnen |
-| `Ctrl` + `x` | Das anvisierte File als **horizontalen** Split-Screen (darunter) öffnen |
+| `Ctrl` + `s` | Das anvisierte File als **horizontalen** Split-Screen (darunter) öffnen |
 | `a` | **A**dd: Neue Datei oder neuen Ordner erstellen (z. B. `ordner/datei.py` erstellt beides) |
 | `d` | **D**elete: Die ausgewählte Datei / den Ordner löschen |
 | `r` | **R**ename: Die ausgewählte Datei / den Ordner umbenennen |
@@ -108,7 +112,7 @@ Wenn der Datei-Explorer (`,d`) geöffnet und fokussiert ist:
 
 ---
 
-## 📝 Markdown Live-Vorschau
+## Markdown Live-Vorschau
 
 Interaktive Browser-Vorschau für Markdown-Dateien.
 
