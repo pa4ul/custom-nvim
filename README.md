@@ -22,7 +22,7 @@ Meine Neovim-Konfiguration, basierend auf [LazyVim](https://github.com/LazyVim/L
 
 ---
 
-## Installation
+## Normale Installation
 
 ### 1. Voraussetzungen installieren
 
@@ -39,6 +39,38 @@ Lösche eventuelle Reste und klone dein Repository direkt in den Zielordner:
 ```bash
 rm -rf ~/.config/nvim ~/.local/share/nvim ~/.local/state/nvim ~/.cache/nvim
 git clone https://github.com/pa4ul/custom-nvim.git ~/.config/nvim
+```
+
+## Air-Gapped Deployment via AppImage (Linux)
+
+### Was ist das und warum nutzen wir es?
+
+Ein **AppImage** ist ein portables Softwareformat für Linux. Im Gegensatz zu klassischen Paketen (wie `.deb` oder `.rpm`) enthält es die Anwendung selbst sowie **alle** notwendigen Abhängigkeiten, Bibliotheken, Sprachserver (LSPs für Python/Ruff) und Treesitter-Parser in einer einzigen Datei.
+
+Für unsere gehärteten oder komplett vom Internet isolierten (air-gapped) Umgebungen ist das der Goldstandard: Man muss auf dem Zielsystem nichts installieren oder konfigurieren. Es gibt **keine Dependency-Hell** (Konflikte mit Systembibliotheken), und das Setup läuft absolut isoliert und reproduzierbar.
+
+### Installation & Nutzung
+
+Wenn du das fertige AppImage aus den GitHub-Releases heruntergeladen hast (Achte auf die Architektur: `x86_64` für Intel/AMD, `aarch64` für Apple Silicon/M1-VMs):
+
+```
+chmod +x nvim-min-*-linux.AppImage
+```
+
+Um die Startzeit massiv zu verkürzen, entpacken wir das Archiv einmalig fest, anstatt es bei jedem Start im RAM dekomprimieren zu lassen:
+
+```
+./nvim-min-*-linux.AppImage --appimage-extract --no-sandbox`
+```
+
+Verschiebe den entpackten Ordner an einen sicheren Ort und erstelle einen dauerhaften Shortcut (Alias) in deiner ~/.zshrc (oder ~/.bashrc):
+
+```
+sudo mv squashfs-root /opt/nvim-appimage
+
+echo 'alias v="/opt/nvim-appimage/AppRun --no-sandbox"' >> ~/.zshrc
+
+source ~/.zshrc
 ```
 
 ## Eigene Shortcuts
