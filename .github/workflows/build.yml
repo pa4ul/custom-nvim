@@ -1,38 +1,46 @@
 name: build
 
 on:
-  pull_request:
-    branches: [main]
-    types: [opened]
   push:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        package_name: ["nvim-min"]
+        # Hier definieren wir zwei Targets: Intel/AMD und M1-Linux-VMs
+        include:
+          - package_name: "nvim-min"
+            arch: "x86_64-linux"
+            asset_name: "nvim-min-x86_64-linux.AppImage"
+          - package_name: "nvim-min"
+            arch: "aarch64-linux"
+            asset_name: "nvim-min-aarch64-linux.AppImage"
     steps:
-      # v4 nutzt standardmäßig Node.js 24 -> Zukunftssicher
       - uses: actions/checkout@v4
 
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@main
+        with:
+          # Das erlaubt dem GitHub-Server, ARM64-Code zu emulieren und zu bauen
+          extra-conf: |
+            extra-platforms = aarch64-linux
 
       - name: Magic Nix Cache
         uses: DeterminateSystems/magic-nix-cache-action@main
 
+      - name: Set up QEMU (für ARM64 Emulation)
+        uses: docker/setup-qemu-action@v3
+
       - name: Run `nix bundle`
-        id: build
         run: |
           nix bundle \
             -o ${{ matrix.package_name }}.AppImage \
             --bundler github:ralismark/nix-appimage \
             --extra-experimental-features nix-command \
-            --extra-experimental-features flakes .#${{ matrix.package_name }}
-          echo "Done building AppImage for ${{ matrix.package_name }}"
+            --extra-experimental-features flakes \
+            --system ${{ matrix.arch }} .#${{ matrix.package_name }}
 
       - name: Upload bundle to release
         if: github.ref == 'refs/heads/main'
@@ -40,6 +48,6 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: "${{ matrix.package_name }}.AppImage"
-          asset_name: "${{ matrix.package_name }}-x86_64-linux.AppImage"
+          asset_name: "${{ matrix.asset_name }}"
           tag: latest
           overwrite: true
