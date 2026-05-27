@@ -16,6 +16,20 @@
 
 ---
 
+Meine Neovim-Konfiguration, basierend auf [LazyVim](https://github.com/LazyVim/LazyVim). Dieses Repository dient als Backup für mein IDE-Setup, meine angepassten Tastenkürzel und als schnelles Cheatsheet für den Entwicklungsalltag.
+
+> **Hinweis zur Konfiguration:** Der globale `mapleader` wurde in der `options.lua` auf das Komma (`,`) umgestellt. Alle Standard-LazyVim-Befehle, die normalerweise mit `Space` beginnen, werden hier mit `,` ausgeführt.
+
+---
+
+## Installation
+
+### 1. Voraussetzungen installieren
+
+Bevor du die Konfiguration klonst, müssen die System-Tools installiert sein:
+
+- **macOS (Homebrew):** `brew install neovim git ripgrep fd lazygit`
+- **Debian/Ubuntu:** `sudo apt install neovim git ripgrep fd-find lazygit`
 - **Fedora/RHEL:** `sudo dnf install neovim git ripgrep fd-find lazygit`
 
 ### 2. Alte Config löschen & Eigene klonen
